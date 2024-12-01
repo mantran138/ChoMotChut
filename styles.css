@@ -52,6 +52,10 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
+  audio {
+    display: none;
+  }
+  
   @keyframes bounce {
     0%, 80%, 100% {
       transform: scale(0);
@@ -68,5 +72,22 @@ body {
     to {
       opacity: 1;
     }
+  }
+
+  .music-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #ff6f61;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .music-button:hover {
+    background-color: #ff4a3d;
   }
   

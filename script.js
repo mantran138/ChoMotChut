@@ -44,5 +44,19 @@ function calculateTimeUntilTarget() {
     const interval = setInterval(updateCountdown, 1000);
   }
   
+  // Bắt đầu đếm ngược
   startCountdown();
+  
+  // Phát nhạc khi người dùng nhấn nút
+  const playMusicButton = document.getElementById("play-music");
+  const backgroundMusic = document.getElementById("background-music");
+  
+  playMusicButton.addEventListener("click", () => {
+    backgroundMusic.volume = 0.5; // Điều chỉnh âm lượng (0.0 - 1.0)
+    backgroundMusic.play().then(() => {
+      playMusicButton.style.display = "none"; // Ẩn nút sau khi nhạc bắt đầu
+    }).catch(error => {
+      console.log("Lỗi phát nhạc:", error);
+    });
+  });
   
