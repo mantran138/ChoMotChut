@@ -1,47 +1,45 @@
-// Tính toán thời gian đến 10:30 PM hôm nay
+// Tính toán thời gian đến 1 tháng 12 năm 2024, 22:30
 function calculateTimeUntilTarget() {
     const now = new Date();
-    const targetTime = new Date();
-    targetTime.setHours(22, 30, 0, 0); // 10:30 PM
-  
-    // Nếu đã qua 10:30 PM, chuyển sang ngày hôm sau
-    if (now > targetTime) {
-      targetTime.setDate(targetTime.getDate() + 1);
-    }
+    const targetTime = new Date(2024, 11, 1, 21, 16, 0); // Tháng 11 là tháng 12 trong JS (0-based)
   
     return targetTime - now;
+  }
+  
+  // Hiển thị thông báo khi hết thời gian
+  function showEndMessage() {
+    const countdownElement = document.getElementById("countdown");
+    const messageElement = document.getElementById("message");
+    const goButton = document.getElementById("go-button");
+  
+    countdownElement.textContent = ""; // Xóa bộ đếm thời gian
+    messageElement.textContent = "Đã đến giờ đi rồiiii";
+    goButton.classList.remove("hidden"); // Hiện nút "đi thôi"
   }
   
   // Cập nhật bộ đếm thời gian và nội dung thông báo
   function startCountdown() {
     const countdownElement = document.getElementById("countdown");
-    const messageElement = document.querySelector("h1");
+    const timeLeft = calculateTimeUntilTarget();
   
-    function updateCountdown() {
-      const timeLeft = calculateTimeUntilTarget();
-      const minutesLeft = Math.floor(timeLeft / (1000 * 60));
-      
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        window.location.href = "hint.html"; // Đường dẫn sang trang khác
-      } else {
-        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    if (timeLeft <= 0) {
+      showEndMessage(); // Hiển thị thông báo ngay nếu đã hết giờ
+    } else {
+      const interval = setInterval(() => {
+        const timeLeft = calculateTimeUntilTarget();
   
-        countdownElement.textContent = `Còn ${hours} giờ ${minutes} phút ${seconds} giây`;
-  
-        // Thay đổi thông báo khi thời gian còn lại <= 30 phút
-        if (minutesLeft <= 30) {
-          messageElement.textContent = "Em bé chờ một chút nữa nhé, rồi em sẽ thấy thuiii";
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          showEndMessage(); // Hiển thị thông báo khi hết giờ
         } else {
-          messageElement.textContent = "Chờ nhiều chúttt, hỏng ai iu em bằng anh iu em đâuuu";
-        }
-      }
-    }
+          const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
   
-    updateCountdown(); // Gọi lần đầu tiên ngay lập tức
-    const interval = setInterval(updateCountdown, 1000);
+          countdownElement.textContent = `Còn ${hours} giờ ${minutes} phút ${seconds} giây`;
+        }
+      }, 1000);
+    }
   }
   
   // Bắt đầu đếm ngược
@@ -58,5 +56,11 @@ function calculateTimeUntilTarget() {
     }).catch(error => {
       console.log("Lỗi phát nhạc:", error);
     });
+  });
+  
+  // Điều hướng khi nhấn nút "đi thôi"
+  const goButton = document.getElementById("go-button");
+  goButton.addEventListener("click", () => {
+    window.location.href = "https://mantran138.github.io/OurFirstAnni/";
   });
   
