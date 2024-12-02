@@ -1,7 +1,7 @@
 // Tính toán thời gian đến 1 tháng 12 năm 2024, 22:30
 function calculateTimeUntilTarget() {
     const now = new Date();
-    const targetTime = new Date(2024, 11, 1, 21, 16, 0); // Tháng 11 là tháng 12 trong JS (0-based)
+    const targetTime = new Date(2024, 11, 1, 22, 30, 0); // Tháng 11 là tháng 12 trong JS (0-based)
   
     return targetTime - now;
   }
